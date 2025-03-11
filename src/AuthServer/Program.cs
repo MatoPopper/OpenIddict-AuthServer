@@ -111,7 +111,7 @@ builder.Services.AddOpenIddict()
                     options
                         .SetTokenEndpointUris("/connect/token")
                         .SetAuthorizationEndpointUris("/connect/authorize")
-                        .SetUserinfoEndpointUris("/connect/userinfo");
+                        .SetUserInfoEndpointUris("/connect/userinfo");
 
                     options.SetIssuer(new Uri("https://auth.popelar.badcat.eu/"));
 
@@ -129,7 +129,7 @@ builder.Services.AddOpenIddict()
                             .UseAspNetCore()
                             .EnableTokenEndpointPassthrough()
                             .EnableAuthorizationEndpointPassthrough()
-                            .EnableUserinfoEndpointPassthrough();
+                            .EnableUserInfoEndpointPassthrough();
 
                     options.AddDevelopmentEncryptionCertificate()
                             .AddDevelopmentSigningCertificate();

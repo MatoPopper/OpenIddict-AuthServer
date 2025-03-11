@@ -1,5 +1,4 @@
 ﻿
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using IdentityUsers.Models;
 using Microsoft.AspNetCore;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Abstractions;
-using OpenIddict.Server;
 using OpenIddict.Server.AspNetCore;
 
 namespace AuthServer.Controllers

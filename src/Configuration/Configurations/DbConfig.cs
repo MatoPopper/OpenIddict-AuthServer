@@ -1,5 +1,4 @@
-﻿using MySqlConnector;
-
+﻿
 namespace Configuration.Configurations
 {
     /// <summary>
@@ -43,37 +42,12 @@ namespace Configuration.Configurations
         /// </summary>
         public string GetConnectionString(DatabaseType dbType, string databaseName)
         {
-            switch (dbType)
+            return dbType switch
             {
-                case DatabaseType.MySQL:
-                    return GetMySqlConnectionString(databaseName);
-                case DatabaseType.MSSQL:
-                    return GetMssqlConnectionString(databaseName);
-                case DatabaseType.PostgreSQL:
-                    return GetPostgreConnectionString(databaseName);
-                default:
-                    throw new ArgumentException("Unsupported database type.");
-            }
-        }
-
-        private string GetMySqlConnectionString(string databaseName)
-        {
-            var connectBuilder = new MySqlConnectionStringBuilder
-            {
-                Server = Host,
-                Port = !string.IsNullOrEmpty(Port) ? uint.Parse(Port) : 3306, // Default port 3306 for MySQL
-                AllowLoadLocalInfile = true,
-                SslMode = MySqlSslMode.None,
-                Database = databaseName
+                DatabaseType.MSSQL => GetMssqlConnectionString(databaseName),
+                DatabaseType.PostgreSQL => GetPostgreConnectionString(databaseName),
+                _ => throw new ArgumentException("Unsupported database type."),
             };
-
-            if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
-            {
-                connectBuilder.UserID = Username;
-                connectBuilder.Password = Password;
-            }
-
-            return connectBuilder.ConnectionString;
         }
 
         private string GetMssqlConnectionString(string databaseName)
